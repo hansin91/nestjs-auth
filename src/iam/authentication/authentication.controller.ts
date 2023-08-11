@@ -51,16 +51,19 @@ export class AuthenticationController {
   ) {
     const { accessToken, refreshToken, refreshTokenId } =
       await this.authService.signIn(signInDto);
+    const cookieExpireTime = new Date(Date.now() + 2 * (60 * 60 * 1000));
     response
       .cookie('accessToken', accessToken, {
         secure: true,
         httpOnly: true,
         sameSite: true,
+        expires: cookieExpireTime,
       })
       .cookie('refreshToken', refreshTokenId, {
         secure: true,
         httpOnly: true,
         sameSite: true,
+        expires: cookieExpireTime,
       });
     return { accessToken, refreshToken };
   }
