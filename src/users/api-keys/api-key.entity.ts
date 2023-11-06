@@ -12,6 +12,6 @@ export class ApiKey {
   @Column()
   uuid: string;
 
-  @ManyToOne((type) => User, (user) => user.apiKeys)
+  @ManyToOne(() => User, (user) => user.apiKeys)
   user: User;
 }

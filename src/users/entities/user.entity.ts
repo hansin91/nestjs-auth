@@ -4,7 +4,7 @@ import {
   Permission,
   PermissionType,
 } from '../../iam/authorization/permission.type';
-import { ApiKey } from '../api-keys/entities/api-key.entity';
+import { ApiKey } from '../api-keys/api-key.entity';
 import { Exclude } from 'class-transformer';
 
 @Entity()
@@ -32,7 +32,7 @@ export class User {
   googleId: string;
 
   @JoinTable()
-  @OneToMany((type) => ApiKey, (apiKey) => apiKey.user)
+  @OneToMany(() => ApiKey, (apiKey) => apiKey.user)
   apiKeys: ApiKey[];
 
   @Column({ enum: Permission, default: [], type: 'json' })
